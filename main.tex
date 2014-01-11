@@ -1,0 +1,107 @@
+%%
+%% Beuth Hochschule für Technik --  Abschlussarbeit
+%%
+%% Hauptdokument
+%%
+%% 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt, a4paper,parskip=half]{report}
+%% Übersetzen als Entwurf
+%\usepackage[entwurf]{bhtThesis}
+%% Übersetzen für die Abgabe
+\usepackage[abgabe]{bhtThesis}
+\typeout{Projekt Spyhole}
+
+%\usepackage{float} %benutze ich für das richtige setzen der Bilder
+\usepackage{blindtext}   %für Blindtext in Kapitel 2
+\usepackage{listings}
+\usepackage{color}
+\lstset{ 
+  literate={ö}{{\"o}}1
+           {ä}{{\"a}}1
+           {ü}{{\"u}}1
+           {Ö}{{\"O}}1
+           {Ä}{{\"A}}1
+           {Ü}{{\"U}}1
+           {ß}{{\ss}}1
+}
+
+%%\usepackage{hyperref}
+
+\usepackage{trsym}
+\usepackage{bytefield}
+\definecolor{light-gray}{gray}{0.90} %Code Hintergrundfarbe
+
+
+%%
+%% Pfad zu den Bildern
+%%
+\graphicspath{
+  {pictures/},
+  {einleitung/pictures},
+  {kapitel1/pictures/},
+  {kapitel2/pictures/},
+  {kapitel3/pictures/},
+  {kapitel4/pictures/},
+  {kapitel5/pictures/}
+}
+
+% julians einstellungen
+\definecolor{darkBHT}{rgb}{0,0.5882,0.5529}
+\setlength{\parskip}{6pt} 
+\setlength{\parindent}{0pt}
+
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%%\renewcommand{\baselinestretch}{1.05} 
+\begin{document}
+\pagestyle{fancy}
+
+
+% \maketitle %Deckblatt
+\input{titlepage_julian.tex}
+
+\tableofcontents %Inhaltsverzeichnis
+
+
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Die Kapitel der Arbeitw
+\input{kapitel1/ch1.tex} %Einleitung
+\input{kapitel2/ch2.tex} %Raspberry Pi
+\input{kapitel3/ch3.tex} %Android App
+\input{kapitel4/ch4.tex} %Desktop App
+\input{kapitel5/ch5.tex} %Zusammenführung und Ausblick
+
+\listoffigures		%Abbildungsverzeichnis
+\lstlistoflistings	%Listingverzeichnis
+\begin{appendix}
+  \input{anhang.tex}
+\end{appendix}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Literaturverzeichnis
+
+\clearpage\newpage
+\addcontentsline{toc}{chapter}{Literatur- und Quellenverzeichnis}
+\bibliographystyle{IEEEtran}
+\bibliography{bhtThesis}
+
+\end{document}
