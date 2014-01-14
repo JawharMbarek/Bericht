@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.1.10)  14 JAN 2014 18:35
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.1.10)  14 JAN 2014 18:46
 entering extended mode
 **main.tex
 (C:\Users\Happy\Documents\GitHub\Bericht\main.tex
@@ -781,7 +781,7 @@ LaTeX Info: Redefining \addtolength on input line 77.
 LaTeX Warning: Unused global option(s):
     [parskip=half].
 
-No file main.aux.
+(C:\Users\Happy\Documents\GitHub\Bericht\main.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 75.
 LaTeX Font Info:    ... okay on input line 75.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 75.
@@ -796,6 +796,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 75.
 LaTeX Font Info:    ... okay on input line 75.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 75.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 75.
+
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
@@ -847,9 +848,13 @@ File: utrsy.fd 2000/06/25v1.0transformation symbol font definitions
 ) [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/Happy/Documents/
-GitHub/Bericht/pictures/BHT-Logo-Basis.pdf>])
-No file main.toc.
+GitHub/Bericht/pictures/BHT-Logo-Basis.pdf>]) (C:\Users\Happy\Documents\GitHub\
+Bericht\main.toc
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 2.
+)
 \tf@toc=\write5
+
 (C:\Users\Happy\Documents\GitHub\Bericht\kapitel1/ch1.tex [1
 
 ]
@@ -872,25 +877,41 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 
 ]
 Kapitel 4.
-) (C:\Users\Happy\Documents\GitHub\Bericht\kapitel5/ch5.tex [5
 
-]
+LaTeX Warning: Citation `bib.jFXRaspPi' on page 5 undefined on input line 11.
+
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 16.
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ts1ptm.fd"
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+)
+<kapitel4/pictures/MaskenDesktopVersion.jpg, id=50, 502.12593pt x 239.39438pt>
+File: kapitel4/pictures/MaskenDesktopVersion.jpg Graphic file (type jpg)
+
+<use kapitel4/pictures/MaskenDesktopVersion.jpg>
+Package pdftex.def Info: kapitel4/pictures/MaskenDesktopVersion.jpg used on inp
+ut line 25.
+(pdftex.def)             Requested size: 426.79134pt x 203.48982pt.
+)
+(C:\Users\Happy\Documents\GitHub\Bericht\kapitel5/ch5.tex [5
+
+] [6] [7 <C:/Users/Happy/Documents/GitHub/Bericht/kapitel4/pictures/MaskenDeskt
+opVersion.jpg>]
 Kapitel 5.
-) [6
+) [8
+
+] (C:\Users\Happy\Documents\GitHub\Bericht\main.lof)
+\tf@lof=\write6
+ [9
 
 ]
-No file main.lof.
-\tf@lof=\write6
-[7
-
-] (C:\Users\Happy\Documents\GitHub\Bericht\main.lol)
+(C:\Users\Happy\Documents\GitHub\Bericht\main.lol)
 \tf@lol=\write7
 
-(C:\Users\Happy\Documents\GitHub\Bericht\anhang.tex [8
+(C:\Users\Happy\Documents\GitHub\Bericht\anhang.tex [10
 
 ]
 Anhang A.
-) [9
+) [11
 
 ] (C:\Users\Happy\Documents\GitHub\Bericht\main.bbl
 Overfull \hbox (95.77097pt too wide) in paragraph at lines 33--36
@@ -899,29 +920,29 @@ m/m/n/10.95 , mbed, http://mbed.org/users/chris/code/m3pi/docs/4b7d6ea9b35b//cl
 assm3pi.html,
  []
 
-) [10
+) [12
 
 
 ] (C:\Users\Happy\Documents\GitHub\Bericht\main.aux)
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 6782 strings out of 493921
- 89321 string characters out of 3147282
- 156170 words of memory out of 3000000
- 9905 multiletter control sequences out of 15000+200000
- 34726 words of font info for 50 fonts, out of 3000000 for 9000
+ 6865 strings out of 493921
+ 90788 string characters out of 3147282
+ 159252 words of memory out of 3000000
+ 9959 multiletter control sequences out of 15000+200000
+ 45041 words of font info for 75 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 35i,11n,45p,316b,351s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 35i,11n,45p,659b,351s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program File
 s/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/font
 s/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times
-/utmri8a.pfb>
-Output written on main.pdf (11 pages, 250237 bytes).
+/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (13 pages, 283233 bytes).
 PDF statistics:
- 82 PDF objects out of 1000 (max. 8388607)
+ 94 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
