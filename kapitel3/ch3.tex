@@ -14,9 +14,11 @@ Die Türspion-App (Spyhole) besteht aus verschiedenen Ebenen sogenannten Activit
 Der Login sollte als Sicherheit in die App eingebaut werden, die Implementierung dieses Teils konnte leider nicht fertiggestellt werden, da bestimmte technische Probleme auftraten, die in der Zeit nicht gelöst werden konnten. Im Folgenden soll aber trotzdem die Vorgehensweise beschrieben werden und welche Technologien verwendet worden sind.
 \subsubsection{Registrierung}
 Um sich überhaupt einloggen zu können muss sich der Benutzer erst einmal registrieren. Dabei muss der Nutzer seine 
-\item{E-Mail}
-\item{Nutzername}
-\item{Passwort}
+\begin{itemize}
+	\item{E-Mail}
+	\item{Nutzername}
+	\item{Passwort}
+\end{itemize}
 eingeben. Diese Daten werden alle in ein JSON-Objekt geschrieben und per POST-Methode an den Server gesendet. Auf dem Server wird in der Index.php erkannt, dass sich ein neuer Nutzer anmelden möchte dem entsprechend wird in einer Mehrfachauswahl (Switch-Case) ausgewertet und in einem weiteren PHP-Skript weiter bearbeitet. Schlussendlich werden die Daten in eine MySQL-Datenbank in die jeweiligen Spalten geschrieben. Das eingegebene Passwort beim Eintragen in die Datenbank verschlüsselt, dass mögliche Hacker die das Password nicht auslesen können. 
 \subsubsection{Der eigentliche Login}
 Beim Login verläuft der Vorgang wie bei der eben beschriebenen Registrierung, bloß in die andere Richtung. Dabei wird ein JSON-Objekt vom Server an das mobile Endgerät geschickt und in der App aufgeschlüsselt und interpretiert. Danach wird verglichen ob sich der Nutzer der sich gerade einloggen möchte schon eingetragen ist, wenn ja wird auf die nächste Activity weitergeleitet, ansonsten wird er zur Registrierung geführt und gebeten sich anzumelden.

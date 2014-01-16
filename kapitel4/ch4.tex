@@ -6,10 +6,26 @@
 %%	
 
 \chapter{Desktop App}
-Zu der Android App soll es parallel eine App für den Desktop geben. Diese wurde mit mit JavaFX programmiert.
+Zu der Android App soll es parallel eine App für den Desktop geben. Diese wurde mit JavaFX programmiert.
+
+\lstset{language=Java,
+				backgroundcolor=\color{light-gray},
+				%frame=single,
+				tabsize=2,
+				%numbers=left,
+				numbersep=5pt,
+				%numberstyle=\color{light-gray},
+				basicstyle=\ttfamily\color{black}\small,
+				keywordstyle=\color{HKS51}\bfseries,
+				commentstyle=\color{HKS13}\slshape,,
+				identifierstyle=\color{blue},
+				stringstyle =\color{orange}}
+				
+				
 \section{Was ist JavaFX ?}
-JavaFX ist eine Java Spezifikation die als Hauptkonkurrenten Adobe Flash und Microsoft Silverlight hat. Ein positiver Punkt ist der Lauffähigkeit auf diversen Geräten wie z.B. Mobilfunk, Desktop-Computern, Embedded Geräten und Blu-ray Geräten. Die Programmierung findet ganz normal wie in Java statt. Die dazu gehörigen Bibliotheken werden seit der Java SE Runtime 7 Update 6 automatisch mit installiert. Es ist unter anderem auf die Grafikprogrammierung ausgelegt. Dadurch lassen sich Grafische Elemente schnell programmieren und mit CSS gestalten.(Quelle: \cite{bib.jFXRaspPi})\newline
+JavaFX ist eine Java Spezifikation die als Hauptkonkurrenten Adobe Flash und Microsoft Silverlight hat. Ein positiver Punkt ist der Lauffähigkeit auf diversen Geräten wie z.B. Mobilfunk, Desktop-Computern, Embedded Geräten und Blu-ray Geräten. Die Programmierung findet ganz normal wie in Java statt. Die dazu gehörigen Bibliotheken werden seit der Java SE Runtime 7 Update 6 automatisch mit installiert. Es ist unter anderem auf die Grafikprogrammierung ausgelegt. Dadurch lassen sich Grafische Elemente schnell programmieren und mit CSS gestalten.(Quelle: \cite{bib.jFXRaspPi})
 Ein sehr bekanntes Embedded Gerät wofür es auch JavaFX gibt ist das Raspberry Pi.
+
 \section{Struktur und Aufbau der App}
 Es gibt insgesamt 5 verschiedene Fenster in der App.
 \begin{itemize}
@@ -20,27 +36,81 @@ Es gibt insgesamt 5 verschiedene Fenster in der App.
 	\item Foto (siehe \ref{subsec.foto})
 \end{itemize}
 
-\begin{figure}[H]
+In JavaFx ist ein solches Fenster ein Stage Objekt. Diesem Stage Objekt können mehrere anderer Objekte hinzugefügt werden. Bei diesen anderen Objekten kann es sich um Buttons, eine Tabelle, ein Textfeld usw handeln.
+
+\begin{figure}[h]
   \begin{center}
-    \includegraphics[width=\linewidth]{MaskenDesktopVersion.jpg}
+    \includegraphics[scale=0.7]{MaskenDesktopVersion.jpg}
   		  \caption{Namen der View müssen noch geändert werden}
   		%  \footnotesize{Quelle: \cite{RolfKlaus}}
-     \label{fig.C167}
+     \label{fig.MaskenDesktopVersion}
   \end{center}
-\end{figure}
+\end{figure}\newpage
 
 \subsection{Login}
 \label{subsec.login}
-Bei dem Login Fenster muss sich der Nutzer mit seinem Usernamen und Passwort was in der Datenbank hinterlegt ist anmelden. Es ist ihm die Möglichkeit gegeben sein Passwort sich in Klartext anzuzeigen zu lassen. Wird der OK - Button betätigt wird eine Verbindung zur Datenbank hergestellt und die eingegebenen Daten auf Korrektheit überprüft. Hat der Benutzer noch kein Konto in der Datenbank kann er sich über den Registrierung - Button registrieren.
+Bei dem Login Fenster muss sich der Nutzer mit seinem Usernamen und Passwort was in der Datenbank hinterlegt ist anmelden. Es ist ihm die Möglichkeit gegeben sein Passwort sich in Klartext anzuzeigen zu lassen. Wird der \textit{OK} Button betätigt wird eine Verbindung zur Datenbank hergestellt und die eingegebenen Daten auf Korrektheit überprüft. Hat der Benutzer noch kein Konto in der Datenbank kann er sich über den Registrierung - Button registrieren.
 
+Bei dem Login Fenster muss sich der Nutzer mit seinem Usernamen und Passwort was in der Datenbank hinterlegt ist anmelden. Über eine Checkbox kann der Benutzer sich sein Passwort in Klartext anzeigen oder verbergen lassen. Dies wurde so realisiert das ein \textbf{TextField (Objekt Bezeichnungen richtig ausschreiben???)} Objekt und ein PasswordField Objekt direkwt übereinander gelegt wurden. Der initialisierungs Zustand ist das das PasswordField sichtbar und das TextField unsichtbar ist. Mit der Checkbox wird das ganze dann getoggelt.
+\begin{lstlisting}[caption={Java Passwort-, Textfeld Un-, Sichtbar},captionpos=b][label=lst:reg.java.pw.txt]
+		pwTextField.managedProperty().bind(checkBox.selectedProperty());
+		pwTextField.visibleProperty().bind(checkBox.selectedProperty());
+
+		passwordField.managedProperty().bind(checkBox.selectedProperty().not());
+		passwordField.visibleProperty().bind(checkBox.selectedProperty().not());
+\end{lstlisting}
+
+Damit das eingegeben mit in dem anderen Feld erscheint werden beide Felder bidirektional miteinander verbunden.
+\begin{lstlisting}[caption={Java Passwort-, Textfeld bidirektional},captionpos=b][label=lst:reg.java.bidirektional]
+		pwTextField.textProperty().bindBidirectional(
+						passwordField.textProperty());
+\end{lstlisting}
 \subsection{Registrierung}
 \label{subsec.registrierung}
+Falls der Benutzer noch kein Konto in der Userdatenbank hat, hat er die Möglichkeit sich über das Registrierung Fenster anzumelden. Software seitig wurde eine Überprüfung eingebaut das jedes Textfeld etwas beinhaltet. Bei den Passwortfeldern wird mit überprüft ob die beiden Passwörter identisch sind. Wenn alle Überprüfungen korrekt sind wird aus den Eingaben und einen Timestamp ein MySQL-String gebaut und an die Datenbank geschickt. Der 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%referenz auf die DB wie sie aufgebaut ist ???
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lstlisting}[caption={Java-SQL neuer Benutzer},captionpos=b][label=lst:reg.java.eintrag]
+	String SQL = "INSERT INTO tb_user VALUES (null,'"
+									+ txtVorname.getText() + "', '"
+									+ txtNachname.getText() + "', '"
+									+ txtEmail.getText() + "', '"
+									+ txtUserName.getText() + "', '"
+									+ txtPw.getText() + "', '" + timestamp
+									+ "')";
+\end{lstlisting}
+Der folgende String zeigt die Darstellung wie der obige String mit Nutzerdaten aussieht und an die Datenbank gesendet wird.
+\begin{lstlisting}[caption={SQL Beispiel String},captionpos=b][label=lst:reg.sql.eintrag]
+	INSERT INTO tb_user VALUES (null,'Max', 'Mustermann', 'max.M@gmx.de',
+	 'mamu', '123', '2014-01-15 21:40:06.967')
+\end{lstlisting}
+
+Zwei wichtige Sicherheitsaspekte konnten leider nicht mehr umgesetzt werden. Sobald sich der Benutzer registriert hat ist er automatisch freigeschaltet. Ohne das ihn erst ein Admin freischalten muss. Der andere Punkt ist das die angegebenen Daten \textbf{lesbar übertragen auch das Passwort} lesbar übertragen auch das Passwort (siehe  \ref). Dies ist natürlich eine große Sicherheitslücke.
 
 \subsection{Control}
 \label{subsec.control}
 
 \subsection{Datenbank}
 \label{subsec.datenbank}
+Diese Stage hat als Hauptobjekt eine Tabelle. Der Tabelleninhalt wird dynamisch erstellt. In einer extra Klasse wird geschaut wie viele Spalten die Datenbank hat und fügt diese dann dem Tabellen Objekt hinzu. Nach dem hinzufügen der Spalten wird Zeile für Zeile aus der Datenbank geholt und in die Tabelle geladen. Zu jedem Eintrag in die Datenbanktabelle \textit{tb\_doorlogger} gehört ein Bild. Um sich zu einen entsprechenden Tabelleneintrag das Bild anzusehen muss man über eine Combobox die ID der Zeile auswählen und auf den Button \textit{Open Picture} klicken. Mehr dazu im Kapitel \ref{subsec.foto}. Die Combobox zeigt nur so viele Zahlen wie es Zeilen in der Tabelle gibt. Wenn nichts in der Datenbank steht und dadurch auch kein Eintrag in die Tabelle gemacht wird, werden die Combobox und der \textit{Open Picture} Button deaktiviert.
 
 \subsection{Foto}
 \label{subsec.foto}
+Nachdem der \textit{Open Picture} Button in der Datenbank Ansicht gedruckt wurde wird mit Hilfe der angegebenen ID aus der Combobox der SQl String gemacht.
+
+\begin{lstlisting}[caption={Java-SQL String Foto öffnen},captionpos=b][label=lst:pic.db.foto.open]
+String SQL = "SELECT * FROM tb_images WHERE ID = " + userID;
+\end{lstlisting}
+
+Aus dem String ist relativ leicht zuerkennen das das Bild aus der \textbf{Datenbanktabelle} \textit{tb\_images} kommt. Das Bild ist aber in der Datenbank nur Binär abgelegt. \textbf{Als BLOB Typ.} Dieser Type existiert auch in Java. Nach dem auslesen des Binärstreams wandeln wir das gelesene in ein Byte Array. Aus dem Byte Array erzeugen wir dann ein Buffered Image.In Swing könnten wir jetzt schon ein Bild uns anzeigen lassen. Aber das Programm wurde ja nicht mit Swing geschrieben sondern mit JavaFX. Dank eines \textit{.toFXImage(BufferedImage arg0, WritableImage arg1)} Befehles lässt sich unser Swing Objekt einfach in ein JavaFX Objekt umwandeln. Dieses zeigen wir dann an. Ein klarer Vorteil bei dieser Methode ist das es nicht wichtig ist was für ein Typ dem Bild mal angehörte.
+\begin{lstlisting}[caption={JavaFX Foto öffnen},captionpos=b][label=lst:pic.javafx.open]
+//Foto aus DB holen
+byte[] imgData = imgShow.getImageDB(userID);
+...
+//Foto nach JavaFX Objekt wandeln
+SwingFXUtils.toFXImage(bufImg, img2);
+
+//Foto imageView hinzufügen
+imageView.setImage(img2);
+\end{lstlisting}
