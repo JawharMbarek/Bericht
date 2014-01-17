@@ -1,26 +1,34 @@
 \select@language {ngerman}
 \contentsline {chapter}{\numberline {1}Einleitung}{2}
 \contentsline {chapter}{\numberline {2}Raspberry Pi}{3}
-\contentsline {section}{\numberline {2.1}OpenVC}{3}
-\contentsline {subsection}{\numberline {2.1.1}Gesichtserkennung}{3}
-\contentsline {section}{\numberline {2.2}MJPG Streamer}{3}
-\contentsline {subsection}{\numberline {2.2.1}subsection}{3}
-\contentsline {chapter}{\numberline {3}Android App}{4}
-\contentsline {section}{\numberline {3.1}Android}{4}
-\contentsline {subsection}{\numberline {3.1.1}Struktur und Aufbau der App}{4}
-\contentsline {subsection}{\numberline {3.1.2}Login}{4}
-\contentsline {subsubsection}{Registrierung}{4}
-\contentsline {subsubsection}{Der eigentliche Login}{5}
-\contentsline {subsection}{\numberline {3.1.3}Control View}{5}
-\contentsline {subsection}{\numberline {3.1.4}Datenbank}{5}
-\contentsline {chapter}{\numberline {4}Desktop App}{6}
-\contentsline {section}{\numberline {4.1}Was ist JavaFX ?}{6}
-\contentsline {section}{\numberline {4.2}Struktur und Aufbau der App}{6}
-\contentsline {subsection}{\numberline {4.2.1}Login}{7}
-\contentsline {subsection}{\numberline {4.2.2}Registrierung}{7}
-\contentsline {subsection}{\numberline {4.2.3}Control}{8}
-\contentsline {subsection}{\numberline {4.2.4}Datenbank}{8}
-\contentsline {subsection}{\numberline {4.2.5}Foto}{8}
-\contentsline {chapter}{\numberline {5}Zusammenf\IeC {\"u}hrung und Ausblick}{10}
-\contentsline {chapter}{\numberline {A}Anhang}{13}
-\contentsline {chapter}{Literatur- und Quellenverzeichnis}{14}
+\contentsline {section}{\numberline {2.1}Hardware}{4}
+\contentsline {subsection}{\numberline {2.1.1}Technische Spezifikationen}{4}
+\contentsline {subsection}{\numberline {2.1.2}Kamera}{5}
+\contentsline {section}{\numberline {2.2}Software und Einstellungen}{5}
+\contentsline {subsection}{\numberline {2.2.1}Betriebssystem}{5}
+\contentsline {subsection}{\numberline {2.2.2}LAMP Webserver}{6}
+\contentsline {subsection}{\numberline {2.2.3}SSH Zugriff}{6}
+\contentsline {subsection}{\numberline {2.2.4}DNS}{7}
+\contentsline {section}{\numberline {2.3}OpenCV}{7}
+\contentsline {subsection}{\numberline {2.3.1}Gesichtserkennung}{7}
+\contentsline {section}{\numberline {2.4}MJPG Streamer}{8}
+\contentsline {subsection}{\numberline {2.4.1}subsection}{8}
+\contentsline {chapter}{\numberline {3}Android App}{9}
+\contentsline {section}{\numberline {3.1}Android}{9}
+\contentsline {subsection}{\numberline {3.1.1}Struktur und Aufbau der App}{9}
+\contentsline {subsection}{\numberline {3.1.2}Login}{9}
+\contentsline {subsubsection}{Registrierung}{9}
+\contentsline {subsubsection}{Der eigentliche Login}{10}
+\contentsline {subsection}{\numberline {3.1.3}Control View}{10}
+\contentsline {subsection}{\numberline {3.1.4}Datenbank}{10}
+\contentsline {chapter}{\numberline {4}Desktop App}{11}
+\contentsline {section}{\numberline {4.1}Was ist JavaFX ?}{11}
+\contentsline {section}{\numberline {4.2}Struktur und Aufbau der App}{11}
+\contentsline {subsection}{\numberline {4.2.1}Login}{12}
+\contentsline {subsection}{\numberline {4.2.2}Registrierung}{12}
+\contentsline {subsection}{\numberline {4.2.3}Control}{13}
+\contentsline {subsection}{\numberline {4.2.4}Datenbank}{13}
+\contentsline {subsection}{\numberline {4.2.5}Foto}{13}
+\contentsline {chapter}{\numberline {5}Zusammenf\IeC {\"u}hrung und Ausblick}{15}
+\contentsline {chapter}{\numberline {A}Anhang}{18}
+\contentsline {chapter}{Literatur- und Quellenverzeichnis}{19}
