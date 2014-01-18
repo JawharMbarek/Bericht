@@ -6,7 +6,7 @@
 %%	
 
 \chapter{Desktop App}
-Zu der Android App soll es parallel eine App für den Desktop geben. Diese wurde mit JavaFX programmiert.
+Zu der Android App gibt es parallel eine App für den Desktop. Diese wurde mit JavaFX programmiert. In den folgenden Kapiteln wird die ungefähre Programmierung der einzelnen Stages beschrieben.
 
 \lstset{language=Java,
 				backgroundcolor=\color{light-gray},
@@ -27,7 +27,7 @@ JavaFX ist eine Java Spezifikation die als Hauptkonkurrenten Adobe Flash und Mic
 Ein sehr bekanntes Embedded Gerät wofür es auch JavaFX gibt ist das Raspberry Pi.
 
 \section{Struktur und Aufbau der App}
-Es gibt insgesamt 5 verschiedene Fenster in der App.
+Es gibt insgesamt 5 verschiedene Stages in der App.
 \begin{itemize}
 	\item Login (siehe \ref{subsec.login})
 	\item Registrierung (siehe \ref{subsec.registrierung})
@@ -40,18 +40,15 @@ In JavaFx ist ein solches Fenster ein Stage Objekt. Diesem Stage Objekt können 
 
 \begin{figure}[h]
   \begin{center}
-    \includegraphics[scale=0.7]{MaskenDesktopVersion.jpg}
-  		  \caption{Namen der View müssen noch geändert werden}
-  		%  \footnotesize{Quelle: \cite{RolfKlaus}}
+    \includegraphics[scale=0.7]{MaskenDesktopVersion.png}
+  		  \caption{Aufbau der App}
      \label{fig.MaskenDesktopVersion}
   \end{center}
 \end{figure}\newpage
 
 \subsection{Login}
 \label{subsec.login}
-Bei dem Login Fenster muss sich der Nutzer mit seinem Usernamen und Passwort was in der Datenbank hinterlegt ist anmelden. Es ist ihm die Möglichkeit gegeben sein Passwort sich in Klartext anzuzeigen zu lassen. Wird der \textit{OK} Button betätigt wird eine Verbindung zur Datenbank hergestellt und die eingegebenen Daten auf Korrektheit überprüft. Hat der Benutzer noch kein Konto in der Datenbank kann er sich über den Registrierung - Button registrieren.
-
-Bei dem Login Fenster muss sich der Nutzer mit seinem Usernamen und Passwort was in der Datenbank hinterlegt ist anmelden. Über eine Checkbox kann der Benutzer sich sein Passwort in Klartext anzeigen oder verbergen lassen. Dies wurde so realisiert das ein \textbf{TextField (Objekt Bezeichnungen richtig ausschreiben???)} Objekt und ein PasswordField Objekt direkwt übereinander gelegt wurden. Der initialisierungs Zustand ist das das PasswordField sichtbar und das TextField unsichtbar ist. Mit der Checkbox wird das ganze dann getoggelt.
+Bei dem Login Fenster muss sich der Nutzer mit seinem Usernamen und Passwort was in der Datenbank hinterlegt ist anmelden. Ist einer der Felder nicht ausgefüllt oder das Passwort bzw der User nicht korrekt wird das mit einem \texttt{Label} als Message dargestellt. Über eine \texttt{CheckBox} kann der Benutzer sich sein Passwort in Klartext anzeigen oder verbergen lassen. Dies wurde so realisiert das ein \texttt{TextField} Objekt und ein \texttt{PasswordField} Objekt direkt übereinander gelegt wurden. Der Initialisierungszustand ist der das das \texttt{PasswordField} sichtbar und das \texttt{TextField} unsichtbar ist. Mit der \texttt{CheckBox} wird das ganze dann getoggelt.
 \begin{lstlisting}[caption={Java Passwort-, Textfeld Un-, Sichtbar},captionpos=b][label=lst:reg.java.pw.txt]
 		pwTextField.managedProperty().bind(checkBox.selectedProperty());
 		pwTextField.visibleProperty().bind(checkBox.selectedProperty());
@@ -65,9 +62,17 @@ Damit das eingegeben mit in dem anderen Feld erscheint werden beide Felder bidir
 		pwTextField.textProperty().bindBidirectional(
 						passwordField.textProperty());
 \end{lstlisting}
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[scale=0.6]{loginStage.png}
+  		  \caption{Login Fenster}
+     \label{fig.loginFenster}
+  \end{center}
+\end{figure}
+
 \subsection{Registrierung}
 \label{subsec.registrierung}
-Falls der Benutzer noch kein Konto in der Userdatenbank hat, hat er die Möglichkeit sich über das Registrierung Fenster anzumelden. Software seitig wurde eine Überprüfung eingebaut das jedes Textfeld etwas beinhaltet. Bei den Passwortfeldern wird mit überprüft ob die beiden Passwörter identisch sind. Wenn alle Überprüfungen korrekt sind wird aus den Eingaben und einen Timestamp ein MySQL-String gebaut und an die Datenbank geschickt. Der 
+Falls der Benutzer noch kein Konto in der Datenbanktabelle \texttt{tb\_Users} hat, hat er die Möglichkeit sich über das Registrierung Fenster anzumelden. Software seitig wurde eine Überprüfung eingebaut das jedes Textfeld etwas beinhaltet. Bei den Passwortfeldern wird mit überprüft ob die beiden Passwörter identisch sind. Wenn alle Überprüfungen korrekt sind wird aus den Eingaben und einem SQL Befehl \texttt{NOW()} ein SQL-String gebaut und an die Datenbank geschickt. Falls die Überprüfung fehlgeschlagen ist wird, wie im  Login Fenster (s. \ref{subsec.login}) eine \texttt{Label} Message ausgegeben.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %referenz auf die DB wie sie aufgebaut ist ???
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -77,33 +82,55 @@ Falls der Benutzer noch kein Konto in der Userdatenbank hat, hat er die Möglich
 									+ txtNachname.getText() + "', '"
 									+ txtEmail.getText() + "', '"
 									+ txtUserName.getText() + "', '"
-									+ txtPw.getText() + "', '" + timestamp
-									+ "')";
+									+ txtPw.getText() + "', NOW())";
 \end{lstlisting}
 Der folgende String zeigt die Darstellung wie der obige String mit Nutzerdaten aussieht und an die Datenbank gesendet wird.
 \begin{lstlisting}[caption={SQL Beispiel String},captionpos=b][label=lst:reg.sql.eintrag]
-	INSERT INTO tb_user VALUES (null,'Max', 'Mustermann', 'max.M@gmx.de',
-	 'mamu', '123', '2014-01-15 21:40:06.967')
+	INSERT INTO tb_user VALUES (null,'Gernot', 'Hassknecht', 'heutShow@zdf.de', 'Hassi', '007', NOW())
 \end{lstlisting}
 
-Zwei wichtige Sicherheitsaspekte konnten leider nicht mehr umgesetzt werden. Sobald sich der Benutzer registriert hat ist er automatisch freigeschaltet. Ohne das ihn erst ein Admin freischalten muss. Der andere Punkt ist das die angegebenen Daten \textbf{lesbar übertragen auch das Passwort} lesbar übertragen auch das Passwort (siehe  \ref). Dies ist natürlich eine große Sicherheitslücke.
+Der Befehle \texttt{NOW()} wird in der Datenbank mit dem aktuellen Datum und Uhrzeit ersetzt.
+Die Sichtbarkeit der Anmeldedaten ist nur direkt innerhalb der Applikation möglich. In diesem Fall mit einem System.out.println() in Eclipse. Was nicht mehr weiter implementiert wurde ist eine extra freischaltung des neuen Users von einem Admin. Nach direkter Registrierung kann sich der User sofort anmelden.
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[scale=0.6]{regStage.png}
+  		  \caption{Registrierung Fenster}
+     \label{fig.RegistrierungFenster}
+  \end{center}
+\end{figure}
 
 \subsection{Control}
 \label{subsec.control}
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[scale=0.5]{streamStage.png}
+  		  \caption{Control Fenster}
+     \label{fig.StreamFenster}
+  \end{center}
+\end{figure}
 
 \subsection{Datenbank}
 \label{subsec.datenbank}
 Diese Stage hat als Hauptobjekt eine Tabelle. Der Tabelleninhalt wird dynamisch erstellt. In einer extra Klasse wird geschaut wie viele Spalten die Datenbank hat und fügt diese dann dem Tabellen Objekt hinzu. Nach dem hinzufügen der Spalten wird Zeile für Zeile aus der Datenbank geholt und in die Tabelle geladen. Zu jedem Eintrag in die Datenbanktabelle \textit{tb\_doorlogger} gehört ein Bild. Um sich zu einen entsprechenden Tabelleneintrag das Bild anzusehen muss man über eine Combobox die ID der Zeile auswählen und auf den Button \textit{Open Picture} klicken. Mehr dazu im Kapitel \ref{subsec.foto}. Die Combobox zeigt nur so viele Zahlen wie es Zeilen in der Tabelle gibt. Wenn nichts in der Datenbank steht und dadurch auch kein Eintrag in die Tabelle gemacht wird, werden die Combobox und der \textit{Open Picture} Button deaktiviert.
 
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[scale=0.6]{dbStage.png}
+  		  \caption{Datenbank Fenster}
+     \label{fig.DatenbankFenster}
+  \end{center}
+\end{figure}
+
 \subsection{Foto}
 \label{subsec.foto}
-Nachdem der \textit{Open Picture} Button in der Datenbank Ansicht gedruckt wurde wird mit Hilfe der angegebenen ID aus der Combobox der SQl String gemacht.
+Nachdem der \texttt{Open Picture} Button in der Datenbank Ansicht gedruckt wurde wird mit Hilfe der angegebenen ID aus der Combobox der SQl String gebaut.
 
 \begin{lstlisting}[caption={Java-SQL String Foto öffnen},captionpos=b][label=lst:pic.db.foto.open]
 String SQL = "SELECT * FROM tb_images WHERE ID = " + userID;
 \end{lstlisting}
 
-Aus dem String ist relativ leicht zuerkennen das das Bild aus der \textbf{Datenbanktabelle} \textit{tb\_images} kommt. Das Bild ist aber in der Datenbank nur Binär abgelegt. \textbf{Als BLOB Typ.} Dieser Type existiert auch in Java. Nach dem auslesen des Binärstreams wandeln wir das gelesene in ein Byte Array. Aus dem Byte Array erzeugen wir dann ein Buffered Image.In Swing könnten wir jetzt schon ein Bild uns anzeigen lassen. Aber das Programm wurde ja nicht mit Swing geschrieben sondern mit JavaFX. Dank eines \textit{.toFXImage(BufferedImage arg0, WritableImage arg1)} Befehles lässt sich unser Swing Objekt einfach in ein JavaFX Objekt umwandeln. Dieses zeigen wir dann an. Ein klarer Vorteil bei dieser Methode ist das es nicht wichtig ist was für ein Typ dem Bild mal angehörte.
+Aus dem String ist relativ leicht zuerkennen das das Bild aus der Datenbanktabelle \texttt{tb\_images} kommt. Das Bild ist aber in der Datenbank nur Binär abgelegt. Als BLOB Typ. Dieser Type existiert auch in Java. Nach dem auslesen des Binärstreams wandeln wir das gelesene in ein Byte Array. Aus dem Byte Array erzeugen wir dann ein Buffered Image. In Swing könnten wir jetzt schon ein Bild uns anzeigen lassen. Aber das Programm wurde ja nicht mit Swing sondern mit JavaFX geschrieben. Dank eines \texttt{.toFXImage(BufferedImage arg0, WritableImage arg1)} Befehles lässt sich unser Swing Objekt einfach in ein JavaFX Objekt umwandeln. Dieses zeigen wir dann an. Ein klarer Vorteil bei dieser Methode ist das es nicht wichtig ist was für ein Typ dem Bild mal angehörte.
 \begin{lstlisting}[caption={JavaFX Foto öffnen},captionpos=b][label=lst:pic.javafx.open]
 //Foto aus DB holen
 byte[] imgData = imgShow.getImageDB(userID);
