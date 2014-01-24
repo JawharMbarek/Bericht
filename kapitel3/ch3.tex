@@ -57,6 +57,10 @@ In dem obigen Codebeispiel wird ein Button in der View erzeugt. Dabei wird diese
 Parallel zu der grafischen Gestaltung der Activity \texttt{Register.xml} wird die eigentliche Logik in Java-Klassen ausgelagert, um eine strikte Trennung von GUI und Fachlogik zu erreichen. Die Klasse \texttt{SignUp.java} ist diesem Fall die Klasse die sich auf das XML-File \texttt{Register.xml} referenziert. Um die einzelnen Objekte des Layouts ansprechen zu können, werden im ersten Schritt alle einzelnen Komponenten erzeugt und im Nachhinein mit der Funktion \texttt{Objekt.findViewByID.ObjektID} auf das jeweilige gerade erzeugte Objekt in der Java-Klasse referenziert.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Code-Beispiel findVIew....
+\begin{lstlisting}[caption={Objekt Erzeugung und Referenzierung},captionpos=b]
+Button btnRegister;
+btnRegister = (Button) findViewById(R.id.btnRegister);
+\end{lstlisting}
 %%%%%%%%%%%%%
 Um überhaupt eine funktionierende Activity zu programmieren brauch man die Funktion \texttt{onCreat()}. In dieser Funktion wird all das ausgeführt was beim starten der Activity passieren soll. Zum einen das Referenzieren auf die erzeugten Objekte und weitere Funktionsaufrufe.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
