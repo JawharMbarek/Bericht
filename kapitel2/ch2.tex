@@ -208,48 +208,61 @@ Das Schema der Datenbank legt fest, welche Daten in einer Datenbank in welcher F
 Die Datenbank \texttt{db\_spyhole} besteht aus drei Tabellen (tb\_doorloggers, tb\_users und tb\_images). In der  Tabelle \texttt{tb\_doorloggers} werden die Aktivitäten an der Tür gespeichert \textbf{(?)}, in der Tabelle \texttt{tb\_users} sind die registierte Users gespeichert, und die Tabelle \texttt{tb\_images} dient zur Speicherung der Bilder \textbf{(welche Bilder? Kommt noch dazu}).  
 
 Ich werde den Aufbau der drei Tabellen genauer beschreiben:
+\lstset{language=SQL,
+				backgroundcolor=\color{light-gray},
+				%frame=single,
+				tabsize=2,
+				breaklines=true,
+				%numbers=left,
+				numbersep=5pt,
+				%numberstyle=\color{light-gray},
+				basicstyle=\ttfamily\color{black}\small,
+				keywordstyle=\color{HKS51}\bfseries,
+				commentstyle=\color{HKS13}\slshape,,
+				identifierstyle=\color{blue},
+				stringstyle =\color{orange}}
 \begin{lstlisting}[caption={Aufbau der Datenbanktabellen},captionpos=b]
 --
--- Tabellenstruktur für Tabelle `tb\_doorlogger`
+-- Tabellenstruktur für Tabelle `tb_doorlogger`
 --
 
-CREATE TABLE IF NOT EXISTS `tb\_doorlogger` (
-  `ID` int(8) NOT NULL AUTO\_INCREMENT,
-  `U\_ID` int(8) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tb_doorlogger` (
+  `ID` int(8) NOT NULL AUTO_INCREMENT,
+  `U_ID` int(8) NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8\_unicode\_ci AUTO\_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `tb\_images`
+-- Tabellenstruktur für Tabelle `tb_images`
 --
 
-CREATE TABLE IF NOT EXISTS `tb\_images` (
-  `ID` int(8) NOT NULL AUTO\_INCREMENT,
-  `dl\_ID` int(8) NOT NULL,
-  `U\_ID` int(8) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tb_images` (
+  `ID` int(8) NOT NULL AUTO_INCREMENT,
+  `dl_ID` int(8) NOT NULL,
+  `U_ID` int(8) NOT NULL,
   `imgdata` longblob,
-  `imgtype` varchar(32) COLLATE utf8\_unicode\_ci DEFAULT NULL,
+  `imgtype` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8\_unicode\_ci AUTO\_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `tb\_user`
+-- Tabellenstruktur für Tabelle `tb_user`
 --
 
-CREATE TABLE IF NOT EXISTS `tb\_user` (
-  `ID` int(8) NOT NULL AUTO\_INCREMENT,
-  `name` varchar(64) COLLATE utf8\_unicode\_ci NOT NULL,
-  `firstname` varchar(64) COLLATE utf8\_unicode\_ci NOT NULL,
-  `email` varchar(128) COLLATE utf8\_unicode\_ci NOT NULL,
-  `user` varchar(16) COLLATE utf8\_unicode\_ci NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8\_bin NOT NULL,
-  `u\_timestamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT\_TIMESTAMP,
+CREATE TABLE IF NOT EXISTS `tb_user` (
+  `ID` int(8) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `firstname` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `user` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `u_timestamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8\_unicode\_ci AUTO\_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 \end{lstlisting}
 Das Attribut „ID“ vom Typ „INT“ kann Werte von  -2147483648 bis 2147483647 erfassen. Die Attribute vom Typ „VARCHAR()“ können beliebige Zeichenkombinationen speichern. Die maximale Zeichenlänge ist dabei von der in der Klammer befindlichen Zahl abhängig. Der Befehl „NOT NULL“ in der Definition der Attribute bewirkt, dass die entsprechende Spalte mit Daten vorhanden sein muss, sobald ein neuer Datensatz angelegt wird. Anders sieht es aber beim Befehl „DEFAULT NULL“ aus, dass die entsprechende Spalte nicht zwingend mit Daten gefüllt werden muss und standardmäßig auf NULL gesetzt wird, wenn ein neuer Datensatz keine Daten enthält. Das Attribut „ID“ wird als Primärschlüssel (Befehl „PRIMARY KEY (`ID`)“ definiert und mit AUTO\_INCREMENT zusätzlich ausgestattet. Das hat die folgende Bedeutung, dass das Attribut „ID“ fortlaufend um eins erhöht wird, wenn ein neuer Datensatz hinzufügt wird. Ein Primärschlüssel dient der eindeutigen Identifizierung der einzelnen Zeilen in einer Tabelle. 
