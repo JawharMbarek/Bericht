@@ -53,6 +53,15 @@ Das Framework Android-SDK bietet es dem Nutzer an die grafische Oberfläche von 
        android:textStyle="bold" />
 \end{lstlisting}
 In dem obigen Codebeispiel wird ein Button in der View erzeugt. Dabei wird dieser mit einer sog. ID versehen, um den Button über diese ID aus dem Quellcode ansprechen zu können. Mithilfe von \texttt{android:layout\_width} und \texttt{android:layout\_height} wird die Höhe und Breite des Buttons beschrieben. Die Option \texttt{fill\_parent} lässt den Button über die ganze Breite des Bildschirmes anzeigen, abhängig von der Auflösung des Endgerätes. Die Option \texttt{wrap\_content} lässt den Button nur so groß werden, dass alle Inhalte gut zu erkennen sind.
+\\
+Parallel zu der grafischen Gestaltung der Activity \texttt{Register.xml} wird die eigentliche Logik in Java-Klassen ausgelagert, um eine strikte Trennung von GUI und Fachlogik zu erreichen. Die Klasse \texttt{SignUp.java} ist diesem Fall die Klasse die sich auf das XML-File \texttt{Register.xml} referenziert. Um die einzelnen Objekte des Layouts ansprechen zu können, werden im ersten Schritt alle einzelnen Komponenten erzeugt und im Nachhinein mit der Funktion \texttt{Objekt.findViewByID.ObjektID} auf das jeweilige gerade erzeugte Objekt in der Java-Klasse referenziert.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Code-Beispiel findVIew....
+%%%%%%%%%%%%%
+Um überhaupt eine funktionierende Activity zu programmieren brauch man die Funktion \texttt{onCreat()}. In dieser Funktion wird all das ausgeführt was beim starten der Activity passieren soll. Zum einen das Referenzieren auf die erzeugten Objekte und weitere Funktionsaufrufe.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%Was passiert nun in der Klasse Code und Beschreibung
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Diese Daten werden alle in ein JSON-Objekt geschrieben und per POST-Methode an den Server gesendet. Auf dem Server wird in der Index.php erkannt, dass sich ein neuer Nutzer anmelden möchte dem entsprechend wird in einer Mehrfachauswahl (Switch-Case) ausgewertet und in einem weiteren PHP-Skript weiter bearbeitet. Schlussendlich werden die Daten in eine MySQL-Datenbank in die jeweiligen Spalten geschrieben. Das eingegebene Passwort beim Eintragen in die Datenbank verschlüsselt, dass mögliche Hacker die das Password nicht auslesen können. 
 \subsubsection{Der eigentliche Login}
 \begin{figure}[h]
