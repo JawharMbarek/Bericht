@@ -86,7 +86,8 @@ Falls der Benutzer noch kein Konto in der Datenbanktabelle \texttt{tb\_Users} ha
 \end{lstlisting}
 Der folgende String zeigt die Darstellung wie der obige String mit Nutzerdaten aussieht und an die Datenbank gesendet wird.
 \begin{lstlisting}[caption={SQL Beispiel String},captionpos=b][label=lst:reg.sql.eintrag]
-	INSERT INTO tb_user VALUES (null,'Gernot', 'Hassknecht', 'heutShow@zdf.de', 'Hassi', '007', NOW())
+	INSERT INTO tb_user VALUES (null,'Gernot', 'Hassknecht', 'heutShow@zdf.de',
+			 'Hassi', '007', NOW())
 \end{lstlisting}
 
 Der Befehle \texttt{NOW()} wird in der Datenbank mit dem aktuellen Datum und Uhrzeit ersetzt.
