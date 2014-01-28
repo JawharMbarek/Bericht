@@ -62,11 +62,47 @@ Button btnRegister;
 btnRegister = (Button) findViewById(R.id.btnRegister);
 \end{lstlisting}
 %%%%%%%%%%%%%
-Um überhaupt eine funktionierende Activity zu programmieren brauch man die Funktion \texttt{onCreat()}. In dieser Funktion wird all das ausgeführt was beim starten der Activity passieren soll. Zum einen das Referenzieren auf die erzeugten Objekte und weitere Funktionsaufrufe.
+Um überhaupt eine funktionierende Activity zu programmieren braucht man die Funktion \texttt{onCreat()}. In dieser Funktion wird all das ausgeführt was beim 
+Starten der Activity passieren soll. Zum einen das Referenzieren auf die erzeugten Objekte und weitere Funktionsaufrufe.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%Was passiert nun in der Klasse Code und Beschreibung
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Diese Daten werden alle in ein JSON-Objekt geschrieben und per POST-Methode an den Server gesendet. Auf dem Server wird in der Index.php erkannt, dass sich ein neuer Nutzer anmelden möchte dem entsprechend wird in einer Mehrfachauswahl (Switch-Case) ausgewertet und in einem weiteren PHP-Skript weiter bearbeitet. Schlussendlich werden die Daten in eine MySQL-Datenbank in die jeweiligen Spalten geschrieben. Das eingegebene Passwort beim Eintragen in die Datenbank verschlüsselt, dass mögliche Hacker die das Password nicht auslesen können. 
+Um den neuen Nutzer zu registrieren wurden einige Funktionen in die Klasse \texttt{UserFunctions.java} ausgegliedert. Diese Funktion beinhaltet verschiedene Funktionen, die anderen Klassen wieder verwendet werden um einen Nutzer zu registrieren, zu prüfen ob er schon eingeloggt ist oder um ihn auszuloggen.
+\begin{lstlisting}[caption={Objekt Erzeugung und Referenzierung},captionpos=b]
+    public JSONObject loginUser(String name, String password);
+    public JSONObject registerUser(String name,  String password);
+    public boolean isUserLoggedIn(Context context);
+    public boolean logoutUser(Context context);
+\end{lstlisting}
+Die Funktion \texttt{registerUser(...)} bekommt zwei verschiedene String - Parameter um den neuen Nutzer in die Liste eintragen zu können. Zu einen den Name und zum anderen sein gewähltes Password.
+\begin{lstlisting}[caption={Objekt Erzeugung und Referenzierung},captionpos=b]
+// Building Parameters
+
+   List<NameValuePair> params = new ArrayList<NameValuePair>();
+   params.add(new BasicNameValuePair("tag", register_tag));
+   params.add(new BasicNameValuePair("name", name));
+   params.add(new BasicNameValuePair("password", password));
+
+   // getting JSON Object
+   JSONParser jsonParser = new JSONParser(registerURL, params,mContext);
+   try {
+         Thread.sleep(2000);
+   } catch (InterruptedException e) {
+         e.printStackTrace();
+   }
+   JSONObject json = jsonParser.getJSONFromUrl();
+   Log.i("JSON4", json.toString());
+   // return json
+   return json;
+\end{lstlisting}
+Es wird eine Liste \texttt{params} mit dem Typ \texttt{NameValuePair} erzeugt. Anschließend werden die Übergabeparameter in die Liste eingefügt mit der Methode \texttt{params.add()}, plus einem Tag \texttt{register_tag}.  Im Nachhinein wird das JSON-Objekt zusammen gefügt und am Ende der Funktion das fertig erzeugte JSON-Objekt mit allen Inhalten zurück gegeben.
+Das erzeugte JSON-Objekt wird per POST-Methode an den Server gesendet. Auf dem Server wird in der Index.php anhand des Tags erkannt, dass sich ein neuer Nutzer anmelden möchte dem entsprechend wird in einer Mehrfachauswahl (Switch-Case) ausgewertet und in einem weiteren PHP-Skript weiter bearbeitet. Schlussendlich werden die Daten in eine MySQL-Datenbank in die jeweiligen Spalten geschrieben. Das eingegebene Passwort wird  beim Eintragen in die Datenbank verschlüsselt, dass mögliche Hacker die das Password nicht auslesen können.
+\\
+Die weiteren Funktionen die in der Klasse enthalten sind, sprechen an für sich selbst und werden dem entsprechen nicht weiter erläutert.
+\\
+In der \texttt{SignUp.java} Klasse wird auf die response des Servers gewartet und bei einem erfolgreichen Registrieren wird der Nutzer der App weitergeleitet auf die Activity \texttt{OverView}.
+
+ 
 \subsubsection{Der eigentliche Login}
 \begin{figure}[h]
   \begin{center}
