@@ -268,23 +268,62 @@ CREATE TABLE IF NOT EXISTS `tb_user` (
 Das Attribut „ID“ vom Typ „INT“ kann Werte von  -2147483648 bis 2147483647 erfassen. Die Attribute vom Typ „VARCHAR()“ können beliebige Zeichenkombinationen speichern. Die maximale Zeichenlänge ist dabei von der in der Klammer befindlichen Zahl abhängig. Der Befehl „NOT NULL“ in der Definition der Attribute bewirkt, dass die entsprechende Spalte mit Daten vorhanden sein muss, sobald ein neuer Datensatz angelegt wird. Anders sieht es aber beim Befehl „DEFAULT NULL“ aus, dass die entsprechende Spalte nicht zwingend mit Daten gefüllt werden muss und standardmäßig auf NULL gesetzt wird, wenn ein neuer Datensatz keine Daten enthält. Das Attribut „ID“ wird als Primärschlüssel (Befehl „PRIMARY KEY (`ID`)“ definiert und mit AUTO\_INCREMENT zusätzlich ausgestattet. Das hat die folgende Bedeutung, dass das Attribut „ID“ fortlaufend um eins erhöht wird, wenn ein neuer Datensatz hinzufügt wird. Ein Primärschlüssel dient der eindeutigen Identifizierung der einzelnen Zeilen in einer Tabelle. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{OpenCV}
+\section{OpenCV und Gesichtserkennung}
 
-Ist eine freie Programmbibliothek(unter BSD-Lizens) mit Algorithmen für Bildverarbeitung und maschinelles sehen. Es beinhaltet C/C++, Python und Java Interfaces und unterstützt Windows, Linux, Mac OS, iOS and Android. OpenCV wird sowohl im kommerziellen wie im privaten Bereich stark benutzt.
+Ist eine freie Programmbibliothek(unter BSD-Lizens) mit Algorithmen für Bildverarbeitung und maschinelles sehen. Es beinhaltet C/C++, Python und Java Interfaces und unterstützt Windows, Linux, Mac OS, iOS and Android. OpenCV wird sowohl im kommerziellen wie im privaten Bereich stark benutzt.\footnote{http://opencv.org; 02.02.2014}\\
+
+Unter die vielen Möglichkeiten das OpenCV anbietet, ist für dieses Projekt die Funktionen der Gesichtserkennung relevant. Um Bewegungen und Gesichter zu erkennen, muss die Aufnahme der Kamera in drei Schritte auswertet werden. 
+
+
+\subsection{Logarithmus traineren}
+Unter Logarithmus trainieren wird gemeint, den Gesichtserkennungsalgorithmus wird bekannt gemacht anhand vorhandenen Bilder, welche Person identifiziert werden. Dafür müssen Bilder von den jeweiligen Personen im System gespeichert sein. Um eine höhere Übertragungsrate zu erreichen werden die Bilder der Kamera nur in Schwarz-Weiß aufgenommen. Deswegen müssen die Trainingsbilder im gleichen Format vorliegen. Mittels eines C-Programmes werden die Gesichter geschnitten und in einen neuen Schwarz-Weiß Bild gespeichert.\\
+
+\begin{figure}[h]
+  \begin{center}		%width=\linewidth
+    \includegraphics{matthias4.jpg}
+  		  \caption{Trainingsbild}
+     \label{Trainingsbild}
+  \end{center}
+\end{figure}
+
+\newpage
+Mittels einer csv-Datei wird zu jeder Person eine Identifikationsnummer zugewiesen und dem Hauptprogramm bekannt gegeben, wo diese Bilder gespeichert sind. Zum Beispiel:\\
+
+\begin{lstlisting}
+/home/pi/pictures/Person1.jpg;1
+/home/pi/pictures/Person2.jpg;2
+/home/pi/pictures/Person3.jpg;3
+\end{lstlisting}
+
 
 %%-------------------------------------------------------------------
-\subsection{Gesichtserkennung}
-Unter die vielen Möglichkeiten das OpenCV anbietet, ist für dieses Projekt die Funktionen der Gesichtserkennung relevant.\\
+\subsection{Kamera Initializieren}
+ Videos sind die Wiedergabe von einer Bildersequenz, also werden einzelne Bilder bearbeitet und ausgewertet.  Zuerst wird die angeschlossene Webcam angesprochen und die Videoaufnahme gestartet. Dies folgt dem gleichen Prinzip wie eine Datei öffnen und aus dieser Datei Zeilenweise lesen. Jede gelesene Zeile wird gespeichert und von einem andere Algorithmus bearbeitet. Bei der Webcam werden einzelne Bilder gespeichert und danach bearbeitet.\\
+ 
+\subsection{Bild auswerten}
+ Wenn ein Bild gespeichert worden ist, kann dieser ausgewertet werden. Als erstes wird mittels OpenCV ein Gesicht im das jeweilige Bild zu erkennen. Ist dieser Schritt erfolgreich, wird um das erkannte Gesicht ein Viereck gezeichnet. Danach versucht das Algorithmus anhand der mit der csv-Datei ausgewertete Bilder, festzustellen ob diese Person bekannt ist. Falls ja, wird anhand der Identifikationsnummer ein Name (im Programmcode fest kodiert) hinzugefügt. \\
 
-hier kommt noch text\\
 
+\begin{figure}[h]
+  \begin{center}		%width=\linewidth
+    \includegraphics[scale=0.5]{unknown.png}
+  		  \caption{Nicht erkannte Person}
+     \label{unknown}
+  \end{center}
+\end{figure}
 
+Dieses bearbeitetes Bild wird dann für die Ausgabe über den Streamer gespeichert. Der Streamer liest das bereits ausgewertete Bild nach der Gesichtserkennung und stellt es als Stream zur Verfügung.
+ 
+ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{MJPG Streamer}
-hier kommt noch text\\
+MJPG-Streamer bittet die Möglichkeit Videodaten von einer Videoquelle als Motion-JPEG streamen zu lassen. Modernere Netzwerkkameras erzeugen Videostreams automatisch, während mit Hilfe von diesem Programm auch einfache Webcams an einem Rechner mit Internet-Zugang Streams erzeugen können. MJPG Streamer gehört nicht zu den offiziellen Paketen von Linux und muss manuell kompiliert werden. Dafür sind folgende Pakete nötig:
 
+\begin{itemize}
+  \item build-essential
+  \item libjpeg-dev
+  \item imagemagick
+  \item subversion
+\end{itemize}
 
-%%-------------------------------------------------------------------
-\subsection{subsection}
-
-hier kommt noch text\\
+Das aktuelle Quellcode muss von der Webseite \textit{http://sourceforge.net/projects/mjpg-streamer/} runtergeladen werden und dementsprechend kompiliert werden.\footnote{http://sourceforge.net/apps/mediawiki/mjpg-streamer/index.php?title=Main\_Page; 02.02.2014} Über einem Webbrowser hat man Zugriff auf das Stream. Im diesem Projekt lautet die Adresse für das Stream \textit{spyhole.no-ip:1900}(der Default Port 8080 wurde auf 1900 geändert). Hier wird eine Oberfläche mit verschiedenen Streamoptionen. Unter anderem Java und Javascript, sowie die Möglichkeit das Stream mittels das Programm VLC zu sehen. Durch Personalisieren dieser Webseite haben unsere Desktop und Mobile App zugriff auf das Stream.
