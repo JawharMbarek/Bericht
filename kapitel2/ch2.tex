@@ -22,11 +22,18 @@
 				commentstyle=\color{HKS13}\slshape,,
 				identifierstyle=\color{blue},
 				stringstyle =\color{orange}}
-				
+
+\begin{figure}[h]
+  \begin{center}		%width=\linewidth
+    \includegraphics[scale=0.6]{raspberrypi-model-b.png}
+  		  \caption{Raspberry Pi Model B}
+     \label{raspPic}
+  \end{center}
+\end{figure}			
 				
 Das Raspberry Pi ist ein kreditkartengroßer Einplatinencomputer von der \textit{Raspberry Pi Foundation}\footnote{Stiftung und Wohltätigkeitsorganisation in Großbritannien} entwickelt wurde. Mithilfe seiner 700 MHz starken ARM-CPU kann er nahezu alles was auch normale Desktoprechner können.\\
 
-Ziel der Entwicklung des Raspberry Pi ist das Interesse an dem Studium der Informatik und ähnliche Fachgebiete zu fordern, bzw. einen günstigen Computer zum Programmieren und Experimentieren anbieten zu können.\\
+Ziel der Entwicklung des Raspberry Pi ist das Interesse an dem Studium der Informatik und ähnliche Fachgebiete zu fördern, bzw. einen günstigen Computer zum Programmieren und Experimentieren anbieten zu können.\\
 
 Durch die geringe Leistungsaufnahme, günstigen Preis und viele verschiedene Ausbau- und Personalisierungsmöglichkeiten können Raspberry Pi’s für verschiedene Zwecke eingesetzt werden. Unter anderem sind beliebte Projekte für den Haushalt Wetterstationen, Radiosender, Media Center, NAS, etc.
 
@@ -39,19 +46,19 @@ Durch die geringe Leistungsaufnahme, günstigen Preis und viele verschiedene Aus
 
 \begin{figure}[h]
   \begin{center}		%width=\linewidth
-    \includegraphics[scale=0.6]{raspberrypi-model-b.png}
-  		  \caption{Raspberry Pi Model B}
-     \label{raspPic}
+    \includegraphics[scale=0.6]{overview.png}
+  		  \caption{Raspberry Pi Model B Komponenten}
+     \label{raspPic_Komp}
   \end{center}
 \end{figure}
 
 \begin{longtable}{||l|l||}
 
 \hline
-Testfall & Fehler\\ \hline\hline
+Komponente & Kenndaten\\ \hline\hline
 \endfirsthead
 \hline
-Testfall & Fehler \\ \hline\hline
+Komponente & Kenndaten \\ \hline\hline
 \endhead
 
 Größe & 85,60 x 53,98 x 17 mm\\ \hline
@@ -88,10 +95,10 @@ Stromversorgung & 5V Micro-USB Anschluss\\ \hline
 \begin{longtable}{||l|l||}
 
 \hline
-Testfall & Fehler\\ \hline\hline
+Komponente & Kenndaten\\ \hline\hline
 \endfirsthead
 \hline
-Testfall & Fehler \\ \hline\hline
+Komponente & Kenndaten \\ \hline\hline
 \endhead
 
 Größe & 20 x 24 mm\\ \hline
@@ -102,23 +109,26 @@ Anschluss & 15-Pin Flachbandkabel\\ \hline
 
 \end{longtable}
 
+Die Kamera wurde speziell für den Raspberry Pi entwickelt, diese wird an die CSI-Schnittstelle (Camera Serial Interface) des Pi angeschlossen. Anschließend muss die Kamera-Unterstützung mittels des Konfigurationsprogramms \texttt{raspi-config} noch aktiviert werden.
+
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Software und Einstellungen}
 
 %%-------------------------------------------------------------------
 \subsection{Betriebssystem}
-Für das Raspberry Pi worden mehrere Open Source Betriebssysteme programmiert. Alle basieren auf verschiedene Linux Distributionen(u.a. OpenSUSE, Fedora, FreeBSD, Debian). Je nach Bedarf kann sich jeder Nutzer für eine Distribution entscheidend, eins des beliebtestens Raspbian, basierend auf Debian, was auch in diesem Projekt benutzt wird. Raspbian inkludiert alle Grundprogramme und -Utilities dass mit vielen verschiedenen Packages kompatibel sind. Dieser Betriebssystem hat sich im laufe der Zeit als sehr stabil bewiesen.\\
+Für das Raspberry Pi worden mehrere Open Source Betriebssysteme programmiert. Alle basieren auf verschiedene Linux Distributionen(u.a. OpenSUSE, Fedora, FreeBSD, Debian). Je nach Bedarf kann sich jeder Nutzer für eine Distribution entscheidend. Eins der beliebtestens Distrubutionen ist Raspbian, basierend auf Debian, was auch in diesem Projekt benutzt wird. Raspbian inkludiert alle Grundprogramme und -Utilities, dass mit vielen verschiedenen Packages kompatibel sind. Dieser Betriebssystem hat sich im laufe der Zeit als sehr stabil bewiesen.\\
 
 Es gibt auch die Möglichkeit Windows auf das Raspberry Pi zu installieren, obwohl Nutzer davon abgeraten werden. Das Windows Betriebssystem benötigt zu viele Ressourcen und läuft sehr langsam und instabil auf das Raspberry Pi.\\
 
-Andere Distributionen sind Gebrauchorientiert aufgestellt, wie zum Beispiel für Media Center das beliebte XBMC (OpenELEC, Raspbmc, XBian). Weiterhin gibt es auch Androidsysteme die auf das Raspberry Pi portiert worden sind.
+Andere Distributionen sind Gebrauchorientiert aufgestellt, wie zum Beispiel für Media Center das beliebte XBMC (OpenELEC, Raspbmc, XBian). Weiterhin gibt es auch Androidsysteme, die auf das Raspberry Pi portiert worden sind.
 \footnote{http://www.raspbian.org; 15.01.2014}
 
 
 %%-------------------------------------------------------------------
 \subsection{LAMP Webserver}
-LAMP steht für Linux Apache MySQL PHP Webserver. Auf das Raspberry Pi wurde ein LAMP Server installiert um die Desktop/Mobil Applikation mit dem Pi zu verbinden und Informationen Austauschen. Durch die Einstellung eines DNS kann auf das Videostreams sowie auf die MySQL Datenbank zugegriffen werden. Damit \textit{http} oder \textit{ssh} Anfragen  an das Server im Raspberry Pi ankommen, müssen Ports für die Verbindung zur Verfügung gestellt werden. Im diesen Fall muss jeweils ein Port für die SSH-Verbindung, den Videostream und die Datenbankzugriffe freigegeben werden.\\
+LAMP steht für Linux Apache MySQL PHP Webserver. Auf das Raspberry Pi wurde ein LAMP Server installiert, um die Desktop/Mobil Applikation mit dem Pi zu verbinden und Informationen auszutauschen. Durch die Einstellung eines DNS kann auf das Videostreams sowie auf die MySQL Datenbank zugegriffen werden. Damit \textit{http} oder \textit{ssh} Anfragen  an das Server im Raspberry Pi ankommen, müssen Ports für die Verbindung zur Verfügung gestellt werden. Im diesen Fall muss jeweils ein Port für die SSH-Verbindung, den Videostream und die Datenbankzugriffe freigegeben werden.\\
 
 Um das LAMP Webserver zu installieren werden folgende Kommandos mit Administratorrechte ausgeführt:\\
 \begin{lstlisting}
@@ -276,7 +286,7 @@ Unter die vielen Möglichkeiten das OpenCV anbietet, ist für dieses Projekt die
 
 
 \subsection{Logarithmus traineren}
-Unter Logarithmus trainieren wird gemeint, den Gesichtserkennungsalgorithmus wird bekannt gemacht anhand vorhandenen Bilder, welche Person identifiziert werden. Dafür müssen Bilder von den jeweiligen Personen im System gespeichert sein. Um eine höhere Übertragungsrate zu erreichen werden die Bilder der Kamera nur in Schwarz-Weiß aufgenommen. Deswegen müssen die Trainingsbilder im gleichen Format vorliegen. Mittels eines C-Programmes werden die Gesichter geschnitten und in einen neuen Schwarz-Weiß Bild gespeichert.\\
+Unter Logarithmus trainieren wird gemeint, den Gesichtserkennungsalgorithmus wird bekannt gemacht anhand vorhandenen Bilder, welche Personen identifiziert werden. Dafür müssen Bilder von den jeweiligen Personen im System gespeichert sein. Um eine höhere Übertragungsrate zu erreichen werden die Bilder der Kamera nur in Schwarz-Weiß aufgenommen. Deswegen müssen die Trainingsbilder im gleichen Format vorliegen. Mittels eines C-Programmes werden die Gesichter geschnitten und in einen neuen Schwarz-Weiß Bild gespeichert.\\
 
 \begin{figure}[h]
   \begin{center}		%width=\linewidth
@@ -298,10 +308,10 @@ Mittels einer csv-Datei wird zu jeder Person eine Identifikationsnummer zugewies
 
 %%-------------------------------------------------------------------
 \subsection{Kamera Initializieren}
- Videos sind die Wiedergabe von einer Bildersequenz, also werden einzelne Bilder bearbeitet und ausgewertet.  Zuerst wird die angeschlossene Webcam angesprochen und die Videoaufnahme gestartet. Dies folgt dem gleichen Prinzip wie eine Datei öffnen und aus dieser Datei Zeilenweise lesen. Jede gelesene Zeile wird gespeichert und von einem andere Algorithmus bearbeitet. Bei der Webcam werden einzelne Bilder gespeichert und danach bearbeitet.\\
+Videos sind die Wiedergabe von einer Bildersequenz, also werden einzelne Bilder bearbeitet und ausgewertet.  Zuerst wird die angeschlossene Webcam angesprochen und die Videoaufnahme gestartet. Dies folgt dem gleichen Prinzip wie eine Datei öffnen und aus dieser Datei Zeilenweise lesen. Jede gelesene Zeile wird gespeichert und von einem andere Algorithmus bearbeitet. Bei der Webcam werden einzelne Bilder gespeichert und danach bearbeitet.\\
  
 \subsection{Bild auswerten}
- Wenn ein Bild gespeichert worden ist, kann dieser ausgewertet werden. Als erstes wird mittels OpenCV ein Gesicht im das jeweilige Bild zu erkennen. Ist dieser Schritt erfolgreich, wird um das erkannte Gesicht ein Viereck gezeichnet. Danach versucht das Algorithmus anhand der mit der csv-Datei ausgewertete Bilder, festzustellen ob diese Person bekannt ist. Falls ja, wird anhand der Identifikationsnummer ein Name (im Programmcode fest kodiert) hinzugefügt. \\
+ Wenn ein Bild gespeichert worden ist, kann dieser ausgewertet werden. Als erstes wird versucht, mittels OpenCV, ein Gesicht im das jeweilige Bild zu erkennen. Ist dieser Schritt erfolgreich, wird um das erkannte Gesicht ein Viereck gezeichnet. Danach versucht das Algorithmus anhand der mit der csv-Datei ausgewertete Bilder, festzustellen ob diese Person bekannt ist. Falls ja, wird anhand der Identifikationsnummer ein Name (im Programmcode fest kodiert) hinzugefügt. \\
 
 
 \begin{figure}[h]
@@ -312,12 +322,12 @@ Mittels einer csv-Datei wird zu jeder Person eine Identifikationsnummer zugewies
   \end{center}
 \end{figure}
 
-Dieses bearbeitetes Bild wird dann für die Ausgabe über den Streamer gespeichert. Der Streamer liest das bereits ausgewertete Bild nach der Gesichtserkennung und stellt es als Stream zur Verfügung.
+Dieses bearbeitetes Bild wird für die Ausgabe über den Streamer gespeichert. Der Streamer liest das bereits ausgewertete Bild nach der Gesichtserkennung und stellt es als Stream zur Verfügung.
  
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{MJPG Streamer}
-MJPG-Streamer bittet die Möglichkeit Videodaten von einer Videoquelle als Motion-JPEG streamen zu lassen. Modernere Netzwerkkameras erzeugen Videostreams automatisch, während mit Hilfe von diesem Programm auch einfache Webcams an einem Rechner mit Internet-Zugang Streams erzeugen können. MJPG Streamer gehört nicht zu den offiziellen Paketen von Linux und muss manuell kompiliert werden. Dafür sind folgende Pakete nötig:
+MJPG-Streamer bittet die Möglichkeit Videodaten von einer Videoquelle als Motion-JPEG streamen zu lassen. Modernere Netzwerkkameras erzeugen Videostreams automatisch, während mit Hilfe von diesem Programm, auch einfache Webcams an einem Rechner mit Internet-Zugang Streams erzeugen können. MJPG Streamer gehört nicht zu den offiziellen Paketen von Linux und muss manuell kompiliert werden. Dafür sind folgende Pakete nötig:
 
 \begin{itemize}
   \item build-essential
@@ -326,4 +336,4 @@ MJPG-Streamer bittet die Möglichkeit Videodaten von einer Videoquelle als Motio
   \item subversion
 \end{itemize}
 
-Das aktuelle Quellcode muss von der Webseite \textit{http://sourceforge.net/projects/mjpg-streamer/} runtergeladen werden und dementsprechend kompiliert werden.\footnote{http://sourceforge.net/apps/mediawiki/mjpg-streamer/index.php?title=Main\_Page; 02.02.2014} Über einem Webbrowser hat man Zugriff auf das Stream. Im diesem Projekt lautet die Adresse für das Stream \textit{spyhole.no-ip:1900}(der Default Port 8080 wurde auf 1900 geändert). Hier wird eine Oberfläche mit verschiedenen Streamoptionen. Unter anderem Java und Javascript, sowie die Möglichkeit das Stream mittels das Programm VLC zu sehen. Durch Personalisieren dieser Webseite haben unsere Desktop und Mobile App zugriff auf das Stream.
+Das aktuelle Quellcode muss von der Webseite \textit{http://sourceforge.net/projects/mjpg-streamer/} heruntergeladen werden und dementsprechend kompiliert werden.\footnote{http://sourceforge.net/apps/mediawiki/mjpg-streamer/index.php?title=Main\_Page; 02.02.2014} Über einem Webbrowser hat man Zugriff auf das Stream. Im diesem Projekt lautet die Adresse für das Stream \textit{spyhole.no-ip:1900}(der Default Port 8080 wurde auf 1900 geändert). Hier wird eine Oberfläche mit verschiedenen Streamoptionen dargestellt. Unter anderem Java und Javascript, sowie die Möglichkeit das Stream mittels das Programm VLC zu sehen. Durch Personalisieren dieser Webseite haben unsere Desktop und Mobile App zugriff auf das Stream.
