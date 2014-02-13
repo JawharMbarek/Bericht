@@ -68,14 +68,14 @@ Starten der Activity passieren soll. Zum einen das Referenzieren auf die erzeugt
 %%Was passiert nun in der Klasse Code und Beschreibung
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Um den neuen Nutzer zu registrieren wurden einige Funktionen in die Klasse \texttt{UserFunctions.java} ausgegliedert. Diese Funktion beinhaltet verschiedene Funktionen, die anderen Klassen wieder verwendet werden um einen Nutzer zu registrieren, zu prüfen ob er schon eingeloggt ist oder um ihn auszuloggen.
-\begin{lstlisting}[caption={Objekt Erzeugung und Referenzierung},captionpos=b]
+\begin{lstlisting}[caption={User Functions},captionpos=b]
     public JSONObject loginUser(String name, String password);
     public JSONObject registerUser(String name,  String password);
     public boolean isUserLoggedIn(Context context);
     public boolean logoutUser(Context context);
 \end{lstlisting}
 Die Funktion \texttt{registerUser(...)} bekommt zwei verschiedene String - Parameter um den neuen Nutzer in die Liste eintragen zu können. Zu einen den Name und zum anderen sein gewähltes Password.
-\begin{lstlisting}[caption={Objekt Erzeugung und Referenzierung},captionpos=b]
+\begin{lstlisting}[caption={registerUser(...)},captionpos=b]
 // Building Parameters
 
    List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -103,7 +103,7 @@ Die weiteren Funktionen die in der Klasse enthalten sind, sprechen an für sich 
 In der \texttt{SignUp.java} Klasse wird auf die response des Servers gewartet und bei einem erfolgreichen Registrieren wird der Nutzer der App weitergeleitet auf die Activity \texttt{OverView}.
 
  
-\subsubsection{Der eigentliche Login}
+\subsubsection{Login}
 \begin{figure}[h]
   \begin{center}
     \includegraphics[scale=0.3]{login.png}
@@ -112,7 +112,7 @@ In der \texttt{SignUp.java} Klasse wird auf die response des Servers gewartet un
   \end{center}
 \end{figure}
 
-Beim Login verläuft der Vorgang wie bei der eben beschriebenen Registrierung, bloß in die andere Richtung. Dabei wird ein JSON-Objekt vom Server an das mobile Endgerät geschickt und in der App aufgeschlüsselt und interpretiert. Danach wird verglichen ob sich der Nutzer der sich gerade einloggen möchte schon eingetragen ist, wenn ja wird auf die nächste Activity weitergeleitet, ansonsten wird er zur Registrierung geführt und gebeten sich anzumelden.
+Beim Login verläuft der Vorgang wie bei der eben beschriebenen Registrierung, bloß in die andere Richtung. Dabei wird ein JSON-Objekt vom Server an das mobile Endgerät geschickt und in der App aufgeschlüsselt und interpretiert. Danach wird verglichen ob sich der Nutzer, der sich gerade einloggen möchte schon eingetragen ist, wenn ja wird er auf die nächste Activity weitergeleitet, ansonsten wird er zur Registrierung geführt und gebeten sich anzumelden.
 \subsection{Control View}
 \begin{figure}[h]
   \begin{center}
@@ -121,6 +121,9 @@ Beim Login verläuft der Vorgang wie bei der eben beschriebenen Registrierung, b
      \label{fig.Prozess}
   \end{center}
 \end{figure}
+Die Activity \texttt{ControlView} ist die Activity in der der Nutzer den Stream und die Öffnung der Tür vornehmen kann. Die Activity beeinhaltet zwei Komponenten, zum einen die Webview in der der Stream mit der Gesichtserkennung dargestellt wird und zum anderen der \texttt{Open Butten}, mit dem das Signal zum Türöffnen gesendet wird.
+
+\newpage
 \subsection{Datenbank}
 \begin{figure}[h]
   \begin{center}
@@ -129,3 +132,4 @@ Beim Login verläuft der Vorgang wie bei der eben beschriebenen Registrierung, b
      \label{fig.Prozess}
   \end{center}
 \end{figure}
+Diese Activity stellt alle Öffnungen der Tür da. Die dargestellten Daten sind die selben die auch in der JavaFx App benutzt werden, sie werden aus der MySQl Datenbank ausgelesen in der Tabelle dargestellt.
