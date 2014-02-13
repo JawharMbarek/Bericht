@@ -215,9 +215,9 @@ Das Schema der Datenbank legt fest, welche Daten in einer Datenbank in welcher F
 				identifierstyle=\color{blue},
 				stringstyle =\color{orange}}
 				
-Die Datenbank \texttt{db\_spyhole} besteht aus drei Tabellen (tb\_doorloggers, tb\_users und tb\_images). In der  Tabelle \texttt{tb\_doorloggers} werden die Aktivitäten an der Tür gespeichert \textbf{(?)}, in der Tabelle \texttt{tb\_users} sind die registierte Users gespeichert, und die Tabelle \texttt{tb\_images} dient zur Speicherung der Bilder \textbf{(welche Bilder? Kommt noch dazu}).  
+Die Datenbank \texttt{db\_spyhole} besteht aus drei Tabellen (tb\_doorloggers, tb\_users und tb\_images). In der  Tabelle \texttt{tb\_doorloggers} werden die Tür-Aktivitäten (Zeitpunkt) gespeichert, in der Tabelle \texttt{tb\_users} sind die registierte Users gespeichert, und die Tabelle \texttt{tb\_images} dient zur Speicherung der Bilder, die mithilfe der Kamera vom Rasberry Pi abgelichtet wurden. Die Bilder in der Tabelle \texttt{tb\_images} sind binär abgelegt.  
 
-Ich werde den Aufbau der drei Tabellen genauer beschreiben:
+Die genauen Details der drei Tabellen:
 \lstset{language=SQL,
 				backgroundcolor=\color{light-gray},
 				%frame=single,
