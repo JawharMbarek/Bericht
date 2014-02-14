@@ -24,7 +24,7 @@ Zu der Android App gibt es parallel eine App für den Desktop. Diese wurde mit J
 				
 				
 \section{Was ist JavaFX ?}
-JavaFX ist eine Java-Spezifikation, die als Hauptkonkurrenten Adobe Flash und Microsoft Silverlight hat. Ein positiver Punkt ist der Lauffähigkeit auf diversen Geräten wie z.B. Mobilfunk, Desktop-Computern, Embedded Geräten und Blu-ray Geräten. Die Programmierung findet ganz normal wie in Java statt. Die dazu gehörigen Bibliotheken werden seit der Java SE Runtime 7 Update 6 automatisch mitinstalliert. Es ist unter anderem auf die Grafikprogrammierung ausgelegt. Dadurch lassen sich grafische Elemente schnell programmieren und mit CSS gestalten.
+JavaFX ist eine Java-Spezifikation, die als Hauptkonkurrenten Adobe Flash und Microsoft Silverlight hat. Ein positiver Punkt ist die Lauffähigkeit auf diversen Geräten wie z.B. Mobilfunk, Desktop-Computern, Embedded Geräten und Blu-ray Geräten. Die Programmierung findet ganz normal wie in Java statt. Die dazu gehörigen Bibliotheken werden seit der Java SE Runtime 7 Update 6 automatisch mit installiert. Es ist unter anderem auf die Grafikprogrammierung ausgelegt. Dadurch lassen sich grafische Elemente schnell programmieren und mit CSS gestalten.
 Ein sehr bekanntes Embedded Gerät, wofür es auch JavaFX gibt, ist das Raspberry PI. \cite{bib.jFXRaspPi}
 
 \section{Struktur und Aufbau der App}
@@ -140,7 +140,7 @@ Diese Stage hat als Hauptobjekt eine Tabelle. Der Tabelleninhalt wird dynamisch 
 
 \subsection{Foto}
 \label{subsec.foto}
-Nachdem der \texttt{Open Picture} Button in der Datenbank Ansicht gedruckt wurde, wird mit Hilfe der angegebenen ID aus der Combobox der SQL-String gebaut.
+Nachdem der \texttt{Open Picture} Button in der Datenbank Ansicht gedrückt wurde, wird mit Hilfe der angegebenen ID aus der Combobox der SQL-String gebaut.
 
 \begin{lstlisting}[caption={Java-SQL String Foto öffnen}\label{lst:pic.db.foto.open},captionpos=b]
 String SQL = "SELECT * FROM tb_images WHERE ID = " + userID;
