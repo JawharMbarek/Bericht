@@ -21,6 +21,24 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
+\bibitem{bib.RaspPi}
+\emph{Raspberry Pi}, Raspberry Pi Foundation, \url{http://www.raspberrypi.org},
+  15.01.2014.
+
+\bibitem{bib.RaspPiGuide}
+\emph{Raspberry Pi Guide}, Raspberry Pi Foundation,
+  \url{http://www.raspberrypiguide.de}, 15.01.2014.
+
+\bibitem{bib.Raspian}
+\emph{Raspian}, \url{http://www.raspbian.org}, 15.01.2014.
+
+\bibitem{bib.opencv}
+\emph{OpenCV}, \url{http://opencv.org}, 02.02.2014.
+
+\bibitem{bib.mjpgStreamer}
+\emph{mjpg-streamer},\url{http://sourceforge.net/apps/mediawiki/mjpg-streamer/index.php?title=Main\_Page},
+  02.02.2014.
+
 \bibitem{bib.jFXRaspPi}
 \emph{JavaFX für das Raspberry Pi}, Oracle,
   \url{https://blogs.oracle.com/java/entry/developer\_preview\_of\_java\_se},

@@ -101,6 +101,7 @@ Das erzeugte JSON-Objekt wird per POST-Methode an den Server gesendet. Auf dem S
 Die weiteren Funktionen die in der Klasse enthalten sind, sprechen an für sich selbst und werden dem entsprechen nicht weiter erläutert.
 \\
 In der \texttt{SignUp.java} Klasse wird auf die response des Servers gewartet und bei einem erfolgreichen Registrieren wird der Nutzer der App weitergeleitet auf die Activity \texttt{OverView}.
+\newpage
 
  
 \subsubsection{Login}
@@ -121,9 +122,30 @@ Beim Login verläuft der Vorgang wie bei der eben beschriebenen Registrierung, b
      \label{fig.Prozess}
   \end{center}
 \end{figure}
-Die Activity \texttt{ControlView} ist die Activity in der der Nutzer den Stream und die Öffnung der Tür vornehmen kann. Die Activity beeinhaltet zwei Komponenten, zum einen die Webview in der der Stream mit der Gesichtserkennung dargestellt wird und zum anderen der \texttt{Open Butten}, mit dem das Signal zum Türöffnen gesendet wird.
+Die Activity \texttt{ControlView} ist die Activity in der der Nutzer den Stream und die Öffnung der Tür vornehmen kann. Die Activity beinhaltet zwei Komponenten, zum einen die Webview in der der Stream mit der Gesichtserkennung dargestellt wird und zum anderen der \texttt{Open Butten}, mit dem das Signal zum Türöffnen gesendet wird.
 
-\newpage
+\begin{lstlisting}[caption={Aufbau der Verbindung und darstellen des Streams},captionpos=b]
+webView.getSettings().setJavaScriptEnabled(true);
+//webView.setAlwaysDrawnWithCacheEnabled(true);
+webView.setClickable(false);
+
+// Create a progressbar
+pDialog = new ProgressDialog(Control.this);
+// Set progressbar title
+pDialog.setTitle(" loading DigitalSpy");
+// Set progressbar message
+pDialog.setMessage("Buffering...");
+pDialog.setIndeterminate(false);
+pDialog.setCancelable(false);
+// Show progressbar
+pDialog.show();
+
+// load and show the website
+webView.loadUrl("http://spyhole.no-ip.biz/javascript_simple.html");
+
+\end{lstlisting}
+Sobald der Nutzer sich auf der Activity Control View befindet, beginnt die App sich mit dem Server zu verbinden und baut die Verbindung auf. Dabei war zu beachten das wir Javascript aktivieren, da wir den Stream mithilfe von Javaskript auf der Webseite darstellen. Um zu verhindern das der Nutzer die Tür öffnet bevor der Stream zu sehen ist, wurde eine Progressbar eingebaut, diese blockiert so lange die Activity so lange die Verbindung noch aufgebaut wird.
+
 \subsection{Datenbank}
 \begin{figure}[h]
   \begin{center}
@@ -133,3 +155,5 @@ Die Activity \texttt{ControlView} ist die Activity in der der Nutzer den Stream 
   \end{center}
 \end{figure}
 Diese Activity stellt alle Öffnungen der Tür da. Die dargestellten Daten sind die selben die auch in der JavaFx App benutzt werden, sie werden aus der MySQl Datenbank ausgelesen in der Tabelle dargestellt.
+Die Database Activity wird von \texttt{ListActivity} erweitert. \texttt{Database} beinhaltet zwei verschiedene Methoden zum einen die \texttt{getData()} und \texttt{fillList()}.  \texttt{getData()} stellt zuerst eine Verbindung zum MySQl- Server her und liest die Daten aus und speichert diese im Objekt \texttt{result} vom Typ ArrayList.\\
+In der Methode \texttt{fillList()} wird dieses Objekt wieder verwendet und anhand der ausgelesenen Daten in die Liste in der App eingetragen.
